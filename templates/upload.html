@@ -1,0 +1,43 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Python Flask File Upload and Display</title>
+	<h2>Select a file to upload and display</h2>
+	<link rel="stylesheet" href="static/css/style.css">
+</head>
+<body id='main'>
+	<form method="post" action="/" enctype="multipart/form-data">
+	    <dl>
+			<p>
+				<input type="file" name="file" autocomplete="off" required>
+			</p>
+	    </dl>
+	    <p>
+			<input type="submit" value="Submit">
+		</p>
+	</form>
+
+	<p>
+		{% with messages = get_flashed_messages() %}
+		  {% if messages %}
+			
+			{% for message in messages %}
+			  <p style="text-align: center;">{{ message }}</p>
+			{% endfor %}
+			
+		  {% endif %}
+		{% endwith %}
+	</p>
+	{% if filename %}
+		<div>
+			<embed src="{{ url_for('display_file', filename=filename) }}" width="650" height="400"></embed> 
+		</div>
+	{% endif %}
+</body>
+</html>
+	
+
+	
